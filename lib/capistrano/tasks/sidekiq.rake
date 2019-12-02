@@ -44,7 +44,7 @@ namespace :sidekiq do
       switch_user(role) do
         case fetch(:init_system)
         when :systemd
-          execute :systemctl, "--user", "reload", fetch(:service_unit_name), raise_on_non_zero_exit: false
+          execute :systemctl, "reload", fetch(:service_unit_name), raise_on_non_zero_exit: false
         when :upstart
           sudo :service, fetch(:upstart_service_name), :reload
         else
@@ -66,7 +66,7 @@ namespace :sidekiq do
       switch_user(role) do
         case fetch(:init_system)
         when :systemd
-          execute :systemctl, "--user", "stop", fetch(:service_unit_name)
+          execute :systemctl, "stop", fetch(:service_unit_name)
         when :upstart
           sudo :service, fetch(:upstart_service_name), :stop
         else
@@ -88,7 +88,7 @@ namespace :sidekiq do
       switch_user(role) do
         case fetch(:init_system)
         when :systemd
-          execute :systemctl, '--user', 'start', fetch(:service_unit_name)
+          execute :systemctl, 'start', fetch(:service_unit_name)
         when :upstart
           sudo :service, fetch(:upstart_service_name), :start
         else
